@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Webots
+*.wbproj
+.*.wbproj
+*.wbt~
+.*.wbt~
+protos/*.cache
+.DS_Store
+
+# Editors
+.vscode/
+.idea/

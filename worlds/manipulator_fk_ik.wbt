@@ -1,0 +1,128 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/universal_robots/protos/UR5e.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/devices/robotiq/protos/Robotiq2f85Gripper.proto"
+
+WorldInfo {
+  title "Manipulator FK IK"
+}
+Viewpoint {
+  orientation -0.15085271397264552 -0.18632615185417212 0.9708377948052409 4.893016556368221
+  position 0.5048808622485275 6.2625759520095095 2.4002717550243027
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 5 5
+}
+UR5e {
+  hidden rotation_1 0 0 -1 9.541538270729178e-05
+  hidden rotation_2 0 1 0 1.5708531774941075
+  hidden rotation_3 0 1 0 1.5863544135755236e-05
+  hidden rotation_4 0 1 0 1.5707894697129008
+  hidden rotation_5 0 0 1 4.107966647175028e-07
+  hidden rotation_6 0 -0.9999999999999999 0 4.1187628987685676e-07
+  controller "fk_ik_contoller"
+  supervisor TRUE
+  toolSlot [
+    Robotiq2f85Gripper {
+      rotation 1 0 0 -1.5707953071795862
+    }
+  ]
+}
+DEF table_pick Solid {
+  translation 0.47 0 0.1
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.55 0.45 0.35
+        roughness 0.8
+        metalness 0
+      }
+      geometry Box {
+        size 0.36 0.5 0.2
+      }
+    }
+  ]
+  name "table_pick"
+  boundingObject Box {
+    size 0.36 0.5 0.2
+  }
+}
+DEF table_place Solid {
+  translation -0.45 0 0.1
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.5 0.5 0.5
+        roughness 0.8
+        metalness 0
+      }
+      geometry Box {
+        size 0.36 0.5 0.2
+      }
+    }
+  ]
+  name "table_place"
+  boundingObject Box {
+    size 0.36 0.5 0.2
+  }
+}
+DEF place_pad Solid {
+  translation -0.45 0 0.201
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.1 0.8 0.2
+        roughness 0.8
+      }
+      geometry Box {
+        size 0.12 0.12 0.002
+      }
+    }
+  ]
+  name "place_pad"
+}
+DEF pick_box Solid {
+  translation 0.44 0 0.237
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.1 0.4 1
+        roughness 0.5
+      }
+      geometry Box {
+        size 0.07 0.07 0.07
+      }
+    }
+  ]
+  name "pick_box"
+  contactMaterial "box_mat"
+  boundingObject Box {
+    size 0.07 0.07 0.07
+  }
+  physics Physics {
+    density -1
+    mass 0.2
+  }
+}
+DEF overhead_cam Robot {
+  translation 0.47 0 1.8
+  rotation 0 1 0 1.5708
+  children [
+    Camera {
+      name "overhead_cam"
+      fieldOfView 0.6
+      width 640
+      height 640
+    }
+  ]
+  name "overhead_cam"
+  controller "camera_node"
+  supervisor TRUE
+}
